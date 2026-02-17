@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SwiftCart E-Commerce</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font awesome link -->
+    <script
+      src="https://kit.fontawesome.com/68a8208ab0.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Remix Icon CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header
+      class="bg-white shadow-md py-4 px-6 flex items-center justify-between md:justify-around"
+    >
+      <h3 class="text-xl font-bold text-center my-4 text-[#4F39F6]">
+        SwiftCart
+      </h3>
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex justify-center space-x-4 my-2">
+        <li><a href="#" class="text-gray-600 hover:text-[#4F39F6]">Home</a></li>
+        <li>
+          <a href="#" class="text-gray-600 hover:text-[#4F39F6]">Products</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-600 hover:text-[#4F39F6]">About</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-600 hover:text-[#4F39F6]">Contact</a>
+        </li>
+      </ul>
+
+      <div class="text-gray-600 hover:text-gray-800 text-xl cursor-pointer">
+        <i class="ri-shopping-cart-line"></i>
+      </div>
+      <!-- Hamburger Button -->
+      <button id="menu-btn" class="md:hidden focus:outline-none">
+        <!-- Icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-7"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-3">
+        <a href="#" class="block hover:text-blue-600">Home</a>
+        <a href="#" class="block hover:text-blue-600">Products</a>
+        <a href="#" class="block hover:text-blue-600">About</a>
+        <a href="#" class="block hover:text-blue-600">Contact</a>
+      </div>
+    </header>
+
+    <script src="app.js"></script>
+  </body>
+</html>
