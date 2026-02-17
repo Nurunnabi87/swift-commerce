@@ -232,3 +232,68 @@ modal.addEventListener("click", (e) => {
     modal.classList.remove("flex");
   }
 });
+
+// Trending Products
+
+async function loadTrendingProducts() {
+  try {
+    const response = await fetch("https://fakestoreapi.com/products");
+    const products = await response.json();
+
+    const trendingProducts = products.slice(0, 3); // first 3
+
+    const container = document.getElementById("trending-container");
+    container.innerHTML = "";
+
+    trendingProducts.forEach((product) => {
+      const card = document.createElement("div");
+
+      card.className =
+        "bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden";
+
+      card.innerHTML = `
+      <div class="hover:scale-105 transition duration-300 bg-white rounded-lg shadow-md">
+        <img src="${product.image}"
+          alt="${product.title}"
+          class="w-full h-64 object-contain bg-gray-200 mb-4 rounded"
+        />
+
+        <div class="flex justify-between p-4">
+          <span class="text-sm bg-indigo-100 text-indigo-600 px-2 py-1 rounded-2xl font-semibold">
+            ${product.category}
+          </span>
+
+          <span class="text-sm">
+            ⭐ ${product.rating.rate} (${product.rating.count})
+          </span>
+        </div>
+
+        <h3 class="text-lg font-semibold px-4 mb-2">
+          ${product.title.slice(0, 20)}...
+        </h3>
+
+        <p class="text-gray-700 px-4 mb-2 font-medium">
+          $${product.price}
+        </p>
+
+        <div class="flex justify-between p-4">
+          <button class="details-btn flex items-center justify-center gap-1 border border-indigo-600 px-4 py-1 rounded-md hover:bg-indigo-600 hover:text-white transition">
+          <i class="ri-eye-line"></i>
+            <span class="ml-1">Details</span>
+          </button>
+
+          <button class="bg-indigo-600 flex items-center justify-center gap-2 px-6 py-1 rounded-md text-white hover:bg-indigo-700 transition">
+            <i class="ri-shopping-cart-line"></i><span>Add</span>
+          </button>
+        </div>
+      </div>
+      `;
+
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Trending products error:", error);
+  }
+}
+
+loadTrendingProducts();
