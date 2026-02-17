@@ -146,3 +146,89 @@ document.getElementById("product-category").addEventListener("click", (e) => {
     }
   }
 });
+
+// ----------------------
+// Open Product Modal
+// ----------------------
+
+async function openProductModal(productId) {
+  try {
+    const response = await fetch(`${API_URL}/${productId}`);
+    const product = await response.json();
+
+    const modal = document.getElementById("modal");
+    const modalContent = document.getElementById("modal-content");
+
+    modalContent.innerHTML = `
+      <button id="close-modal"
+        class="absolute top-4 right-4 text-gray-500 hover:text-black text-xl">
+        ✕
+      </button>
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Image -->
+        <div class="flex items-center justify-center bg-gray-100 rounded-lg p-4">
+          <img src="${product.image}"
+               class="h-64 object-contain" />
+        </div>
+
+        <!-- Details -->
+        <div>
+          <h2 class="text-2xl font-bold mb-3">
+            ${product.title}
+          </h2>
+
+          <p class="text-gray-600 mb-4">
+            ${product.description}
+          </p>
+
+          <div class="flex items-center gap-4 mb-4">
+            <span class="text-2xl font-semibold text-indigo-600">
+              $${product.price}
+            </span>
+
+            <span class="text-yellow-500">
+              ⭐ ${product.rating.rate}
+              (${product.rating.count})
+            </span>
+          </div>
+
+          <div class="flex gap-4">
+            <button class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition">
+              Buy Now
+            </button>
+
+            <button class="border border-indigo-600 px-6 py-2 rounded-md hover:bg-indigo-600 hover:text-white transition">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+      </div>
+    `;
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+  } catch (error) {
+    console.error("Modal fetch error:", error);
+  }
+}
+
+document.getElementById("product-container").addEventListener("click", (e) => {
+  if (e.target.closest(".details-btn")) {
+    const card = e.target.closest(".product-card");
+    const productId = card.dataset.id;
+
+    openProductModal(productId);
+  }
+});
+
+const modal = document.getElementById("modal");
+
+modal.addEventListener("click", (e) => {
+  if (e.target.id === "modal" || e.target.id === "close-modal") {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+});
